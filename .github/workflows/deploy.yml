@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - develop
 
     paths:
       - 'styles/**'  # This workflow will trigger on changes to files in the styles directory
