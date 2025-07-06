@@ -30,9 +30,23 @@ jobs:
             aws-region: ${{ secrets.AWS_REGION }}
 
         # Add a lint or minify step using tools like stylelint
+        - name: Restore npm cache
+          uses: actions/cache@v3
+          with:
+            path: node_modules
+            key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+            restore-keys: |
+              ${{ runner.os }}-node-modules-
+
         - name: Install dependencies
           run: npm install stylelint stylelint-config-standard --save-dev
 
+        - name: Save npm cache
+          if: steps.cache.outputs.cache-hit != 'true'
+          uses: actions/cache@v3
+          with:
+            path: node_modules
+            key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
         - name: Lint CSS
           run: npx stylelint "styles/**/*.css"
 
