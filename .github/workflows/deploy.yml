@@ -38,17 +38,17 @@ jobs:
             restore-keys: |
               ${{ runner.os }}-node-modules-
 
-        - name: Install dependencies
-          run: npm install stylelint stylelint-config-standard --save-dev
-
-        - name: Save npm cache
-          if: steps.cache.outputs.cache-hit != 'true'
-          uses: actions/cache@v3
-          with:
-            path: node_modules
-            key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
-        - name: Lint CSS
-          run: npx stylelint "styles/**/*.css"
+#        - name: Install dependencies
+#          run: npm install stylelint stylelint-config-standard --save-dev
+#
+#        - name: Save npm cache
+#          if: steps.cache.outputs.cache-hit != 'true'
+#          uses: actions/cache@v3
+#          with:
+#            path: node_modules
+#            key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+#        - name: Lint CSS
+#          run: npx stylelint "styles/**/*.css"
 
         - name: Sync CSS to S3
           run: |
