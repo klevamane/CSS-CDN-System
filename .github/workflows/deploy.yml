@@ -29,14 +29,23 @@ jobs:
             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
             aws-region: ${{ secrets.AWS_REGION }}
 
-        # Add a lint or minify step using tools like stylelint
-        - name: Restore npm cache
-          uses: actions/cache@v3
-          with:
-            path: node_modules
-            key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
-            restore-keys: |
-              ${{ runner.os }}-node-modules-
+        - name: Validate CSS (optional)
+          run: |
+            # Install CSS validator
+            npm install -g stylelint
+            # Run validation on CSS files
+            stylelint "styles/**/*.css" || echo "Validation warnings found"
+
+        - name: Minify CSS (optional)
+          run: |
+            # Install CSS minifier
+            npm install -g clean-css-cli
+            # Create minified versions
+            mkdir -p dist
+            for file in styles/*.css; do
+              filename=$(basename "$file")
+              cleancss -o "dist/$filename" "$file"
+            done
 
 #        - name: Install dependencies
 #          run: npm install stylelint stylelint-config-standard --save-dev
@@ -56,4 +65,5 @@ jobs:
 
         - name: Invalidate CloudFront cache
           run: |
+                # Invalidate all CSS files to ensure fresh content
                 aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
