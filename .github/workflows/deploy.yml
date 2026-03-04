@@ -61,7 +61,7 @@ jobs:
 
         - name: Sync CSS to S3
           run: |
-            aws s3 sync ./styles s3://${{secrets.S3_CDN_BUCKET_NAME}} --delete --acl public-read
+            aws s3 sync ./styles s3://${{secrets.S3_CDN_BUCKET_NAME}} --delete
 
         - name: Invalidate CloudFront cache
           run: |
