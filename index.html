@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDN CSS Test Page</title>
+
+    <!-- Load CSS from CDN -->
+    <link rel="stylesheet" href="https://d3p0cbg6zps4tu.cloudfront.net/main.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>CSS CDN Test</h1>
+        <p>If the styling loads correctly, your CDN is working.</p>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Example Content</h2>
+            <p>
+                This page loads its stylesheet from the CloudFront CDN.
+                If you update the CSS and push changes to GitHub, the styling
+                should update automatically once deployment completes.
+            </p>
+        </section>
+
+        <section>
+            <h2>Sample Button</h2>
+            <button class="btn-primary">Click Me</button>
+        </section>
+
+        <section>
+            <h2>Card Example</h2>
+            <div class="card">
+                <h3>Sample Card</h3>
+                <p>This card is styled using CSS delivered via CDN.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Powered by GitHub + AWS S3 + CloudFront CDN</p>
+    </footer>
+
+</body>
+</html>
